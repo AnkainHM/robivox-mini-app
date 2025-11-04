@@ -124,10 +124,12 @@ function App() {
               const errorText = await response.text();
               webApp.showAlert(`Ошибка сервера: ${response.status}`);
               console.error('Server error:', errorText);
+              webApp.close();
             }
           } catch (error: any) {
             console.error('Fetch error:', error);
             webApp.showAlert('Ошибка сети: ' + (error.message || 'неизвестная'));
+            webApp.close();
           }
         } else {
           webApp.showAlert('Выберите все параметры!');
