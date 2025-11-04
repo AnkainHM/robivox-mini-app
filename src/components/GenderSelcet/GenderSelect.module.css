@@ -1,0 +1,26 @@
+.container {
+  margin-bottom: 24px;
+}
+
+.genderTabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s;
+}
+
+.active {
+  background-color: var(--tg-theme-button-color);
+  color: var(--tg-theme-text-color);
+  border-color: var(--tg-theme-button-color);
+}
