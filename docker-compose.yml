@@ -15,7 +15,7 @@ services:
      - "traefik.http.routers.robivox-mini-app.entrypoints=websecure"
      - "traefik.http.routers.robivox-mini-app.tls.certresolver=myresolver"
      - "traefik.http.routers.robivox-mini-app.priority=21"
-     - "traefik.http.services.robivox-mini-app.loadbalancer.server.port=3000"
+     - "traefik.http.services.robivox-mini-app.loadbalancer.server.port=5893"
      - "traefik.http.routers.robivox-mini-app.middlewares=strip-robivox-prefix"      
      - "traefik.http.routers.robivox-mini-app-http.rule=Host(`${APP_DOMAIN}`) && PathPrefix(`${APP_PATHPREFIX}`)"
      - "traefik.http.routers.robivox-mini-app-http.entrypoints=web"
