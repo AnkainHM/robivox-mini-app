@@ -47,7 +47,7 @@ export const SelectedVoice: React.FC<SelectedVoiceProps> = ({
           {'<'}
         </button>
         <div className={styles.avatar}>
-          <img src={voice.gender === 'male' ? '/assets/male_avatar.jpg' : '/assets/female_avatar.jpg'} alt="img" />
+          <img src={voice.gender === 'male' ? 'assets/male_avatar.jpg' : 'assets/female_avatar.jpg'} alt="img" />
         </div>
         <div className={styles.playBtnWrapper}>
           {voice.audio !== null && 
