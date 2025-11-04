@@ -3,26 +3,25 @@ version: '3.8'
 services:
   robivox-mini-app:
     build: .
-    ports:
-      - "5893:5893"    
     restart: unless-stopped
     networks:
       - traefik
-    labels:
-     - "traefik.enable=true"
-     - "traefik.docker.network=traefik"      
-     - "traefik.http.routers.robivox-mini-app.rule=Host(`${APP_DOMAIN}`) && PathPrefix(`${APP_PATHPREFIX}`)"
-     - "traefik.http.routers.robivox-mini-app.entrypoints=websecure"
-     - "traefik.http.routers.robivox-mini-app.tls.certresolver=myresolver"
-     - "traefik.http.routers.robivox-mini-app.priority=21"
-     - "traefik.http.services.robivox-mini-app.loadbalancer.server.port=5893"
-     - "traefik.http.routers.robivox-mini-app.middlewares=strip-robivox-prefix"      
-     - "traefik.http.routers.robivox-mini-app-http.rule=Host(`${APP_DOMAIN}`) && PathPrefix(`${APP_PATHPREFIX}`)"
-     - "traefik.http.routers.robivox-mini-app-http.entrypoints=web"
-     - "traefik.http.routers.robivox-mini-app-http.middlewares=api-redirect-https,strip-robivox-prefix"
-     - "traefik.http.middlewares.api-redirect-https.redirectscheme.scheme=https"
-     - "traefik.http.middlewares.api-redirect-https.redirectscheme.permanent=true"      
-     - "traefik.http.middlewares.strip-robivox-prefix.stripprefix.prefixes=${APP_PATHPREFIX}"
+    labels:      
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"      
+      - "traefik.http.routers.robivox-mini-app.rule=Host(`${APP_DOMAIN}`) && PathPrefix(`${APP_PATHPREFIX}`)"
+      - "traefik.http.routers.robivox-mini-app.entrypoints=websecure"
+      - "traefik.http.routers.robivox-mini-app.tls.certresolver=myresolver"
+      - "traefik.http.routers.robivox-mini-app.priority=21"
+      - "traefik.http.routers.robivox-mini-app.service=robivox-mini-app"      
+      - "traefik.http.routers.robivox-mini-app-http.rule=Host(`${APP_DOMAIN}`) && PathPrefix(`${APP_PATHPREFIX}`)"
+      - "traefik.http.routers.robivox-mini-app-http.entrypoints=web"
+      - "traefik.http.routers.robivox-mini-app-http.middlewares=robivox-redirect-https,robivox-strip-prefix"      
+      - "traefik.http.services.robivox-mini-app.loadbalancer.server.port=5893"      
+      - "traefik.http.middlewares.robivox-redirect-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.robivox-redirect-https.redirectscheme.permanent=true"      
+      - "traefik.http.middlewares.robivox-strip-prefix.stripprefix.prefixes=${APP_PATHPREFIX}"
+
 networks:
   traefik:
     external: true
