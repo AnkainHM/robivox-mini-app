@@ -56,7 +56,7 @@ export const VoiceOption: React.FC<VoiceOptionProps> = ({
     >
 
       <div className={styles.avatar}>
-        <img src={voice.gender === 'male' ? '/assets/male_avatar.jpg' : '/assets/female_avatar.jpg'} alt="img" />
+        <img src={voice.gender === 'male' ? 'assets/male_avatar.jpg' : 'assets/female_avatar.jpg'} alt="img" />
       </div>
       <div className={styles.voiceInfo}>
         <h3 className={styles.voiceName}>{voice.translations[0]?.name || voice.id}</h3>
