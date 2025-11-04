@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { GETLANGUAGES, GETVOICESBYLANGUAGE } from './lib/queries';
 import { GetAllLanguagesResponse, GetVoicesByLanguageResponse, Language, Voice } from './models/models';
 import './styles.css';
@@ -75,9 +75,10 @@ function App() {
     skip: !selectedLanguage,
   });
 
-  const webApp = window.Telegram?.WebApp;
+
 
   useEffect(() => {
+    const webApp = window.Telegram?.WebApp;
     if (webApp && webApp.initDataUnsafe) {      
       webApp.ready();
 
@@ -145,7 +146,7 @@ function App() {
     } else {
       console.warn('Telegram WebApp not available or initDataUnsafe missing');
     }
-  }, [webApp, selectedLanguage, selectedVoice, selectedSpeed]);
+  }, [selectedLanguage, selectedVoice, selectedSpeed]);
 
   useEffect(() => {
   if (languagesData && !selectedLanguage) {
