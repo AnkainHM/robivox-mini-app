@@ -61,13 +61,13 @@ function App() {
     setIsLoading(false);
   }, []);
 
-  // if (isLoading) {
-  //   return null;
-  // }
+  if (isLoading) {
+    return null;
+  }
 
-  // if (!isInTelegram) {
-  //   return null;
-  // }
+  if (!isInTelegram) {
+    return null;
+  }
 
   const { data: languagesData, loading: languagesLoading, error: languagesError } = useQuery<GetAllLanguagesResponse>(GETLANGUAGES);
   const { data: voicesData, loading: voicesLoading, error: voicesError } = useQuery<GetVoicesByLanguageResponse>(GETVOICESBYLANGUAGE, {
