@@ -23,3 +23,7 @@ services:
      - "traefik.http.middlewares.api-redirect-https.redirectscheme.scheme=https"
      - "traefik.http.middlewares.api-redirect-https.redirectscheme.permanent=true"      
      - "traefik.http.middlewares.strip-robivox-prefix.stripprefix.prefixes=${APP_PATHPREFIX}"
+networks:
+  traefik:
+    external: true
+    name: traefik
