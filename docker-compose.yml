@@ -6,20 +6,29 @@ services:
     restart: unless-stopped
     networks:
       - traefik
-    labels:      
+    labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=traefik"      
+      - "traefik.docker.network=traefik"
+      
+      # HTTPS router
       - "traefik.http.routers.robivox-mini-app.rule=Host(`${APP_DOMAIN}`) && PathPrefix(`${APP_PATHPREFIX}`)"
       - "traefik.http.routers.robivox-mini-app.entrypoints=websecure"
       - "traefik.http.routers.robivox-mini-app.tls.certresolver=myresolver"
       - "traefik.http.routers.robivox-mini-app.priority=21"
-      - "traefik.http.routers.robivox-mini-app.service=robivox-mini-app"      
+      - "traefik.http.routers.robivox-mini-app.service=robivox-mini-app"
+      - "traefik.http.routers.robivox-mini-app.middlewares=robivox-strip-prefix"  # ← ДОБАВЬТЕ ЭТУ СТРОКУ
+
+      # HTTP router (redirect to HTTPS)
       - "traefik.http.routers.robivox-mini-app-http.rule=Host(`${APP_DOMAIN}`) && PathPrefix(`${APP_PATHPREFIX}`)"
       - "traefik.http.routers.robivox-mini-app-http.entrypoints=web"
-      - "traefik.http.routers.robivox-mini-app-http.middlewares=robivox-redirect-https,robivox-strip-prefix"      
-      - "traefik.http.services.robivox-mini-app.loadbalancer.server.port=5893"      
+      - "traefik.http.routers.robivox-mini-app-http.middlewares=robivox-redirect-https,robivox-strip-prefix"
+
+      # Service
+      - "traefik.http.services.robivox-mini-app.loadbalancer.server.port=5893"
+
+      # Middlewares
       - "traefik.http.middlewares.robivox-redirect-https.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.robivox-redirect-https.redirectscheme.permanent=true"      
+      - "traefik.http.middlewares.robivox-redirect-https.redirectscheme.permanent=true"
       - "traefik.http.middlewares.robivox-strip-prefix.stripprefix.prefixes=${APP_PATHPREFIX}"
 
 networks:
