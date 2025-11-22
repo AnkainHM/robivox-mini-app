@@ -8,6 +8,10 @@ import { GenderSelect } from './components/GenderSelcet/GenderSelect';
 import { VoiceList } from './components/VoiceList/VoiceList';
 import { SpeedSlider } from './components/SpeedSlider/SpeedSlider';
 import { SelectedVoice } from './components/SelectedVoice/SelectedVoice';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
 
 interface TelegramUser {
   id: number;
@@ -201,7 +205,7 @@ function App() {
   };
   
   return (
-    <div className="min-h-screen bg-[var(--tg-theme-bg-color)] text-[var(--tg-theme-text-color)] p-4 max-w-md mx-auto">
+    <div className="min-h-screen p-4 max-w-md mx-auto">
       <div className="container">
         {!selectedVoice && (
           <LanguageSelect
@@ -221,9 +225,6 @@ function App() {
                   gender={selectedGender}
                   onGenderChange={handleGenderChange}
                 />
-                <p className="instruction">
-                  Для выбора голоса кликни на фото или на имя диктора
-                </p>
                 <VoiceList
                   voices={filteredVoices}
                   selectedVoice={selectedVoice}

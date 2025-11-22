@@ -83,7 +83,7 @@ export const LanguageSelect: React.FC<LanguageSelectProps> = ({
 
   return (
     <div className={styles.container}>
-      <label className={styles.label}>Выберите язык:</label>
+      <label className={styles.label}>Выберите язык</label>
 
       <div
         className={styles.dropdownHeader}
@@ -94,14 +94,16 @@ export const LanguageSelect: React.FC<LanguageSelectProps> = ({
             ? (selectedLanguageObj?.translations.find(el => el.languageCode === 'ru')?.name || selectedLanguageObj?.id || 'Неизвестный язык')
             : 'Выберите язык'}
         </span>
-        <span className={styles.arrow}>▼</span>
+        <div className={styles.arrow}>
+          <img src="assets/chevron_down.svg" alt="chevron_down" />
+        </div>
       </div>
       
       {isOpen && (
         <div className={styles.overlay}>
           <div className={styles.modalContainer}>
             <div className={styles.modalHeader}>
-              <h3>Выберите язык</h3>
+              <h4>Выбор языка</h4>
               <button
                 className={styles.closeButton}
                 onClick={() => {
@@ -109,19 +111,34 @@ export const LanguageSelect: React.FC<LanguageSelectProps> = ({
                   setSearchQuery('');
                 }}
               >
-                ✕
+                <img src="assets/close_icon.svg" alt="close" />
               </button>
             </div>
 
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="Поиск языка..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={handleKeyDown}
-              className={styles.searchInput}
-            />
+              <div className={styles.searchContainer}>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  placeholder="Поиск голоса"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  className={styles.searchInput}
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    className={styles.clearButton}
+                    onClick={() => {
+                      setSearchQuery('');              
+                    }}
+                    aria-label="Очистить поиск"
+                  >
+                    <img src="assets/close_icon.svg" alt="очистить" />
+                  </button>
+                )}
+                {!searchQuery && (<img className={styles.searchIcon} src="assets/search_icon.svg" alt="search" />)}   
+              </div>
 
             <div className={styles.optionsList}>
               {filteredLanguages.length > 0 ? (

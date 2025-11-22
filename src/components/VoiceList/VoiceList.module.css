@@ -1,36 +1,95 @@
 .voiceItem {
-  padding: 15px 0;
-  border-bottom: 1px solid var(--tg-theme-hint-color);
+  margin-bottom: 4px;
 }
 
 .voiceItem:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .searchContainer {
-  margin-bottom: 16px;
-  color: var(--tg-theme-text-color, #000);
+  margin-bottom: 12px;
+  position: relative;
 }
 
 .searchInput {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--tg-theme-hint-color);
-  border-radius: 8px;
-  font-size: 16px;
-  background-color: var(--tg-theme-bg-color, #fff);
-  color: var(--tg-theme-text-color, #000);
+  height: 46px;
+  padding: 0 16px;
+  border-radius: 16px;
+  border: 1px solid #C4C4C4;
+  font-size: 14px;
   outline: none;
   box-sizing: border-box;
 }
 
+.searchIcon {
+  position: absolute;
+  right: 15px;
+  top: 16px;
+}
+
+.clearButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.clearButton img {
+  width: 20px;
+}
+
+
 .searchInput::placeholder {
-  color: var(--tg-theme-hint-color, #aaa);
+  color:#aaa;
 }
 
 .noResults {
-  padding: 20px;
+  margin-top: 25%;
+  font-size: 14px;
+  font-weight: 500;
   text-align: center;
-  color: var(--tg-theme-hint-color, #888);
-  font-style: italic;
+  color: #262626;
+}
+
+.noResultsImg {
+  margin-top: 30px;
+  background-size: cover;
+  background-position: center;
+  background-image: url('/assets/no_results.svg');  
+  padding-bottom: 50%;
+  position: relative;
+}
+
+.noResultsImg::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: linear-gradient(to top, white, transparent);
+  z-index: 1;
+}
+
+.noResultsImg::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  mask: linear-gradient(to top, black, transparent);
 }

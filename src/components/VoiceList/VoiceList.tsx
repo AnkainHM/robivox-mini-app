@@ -44,11 +44,24 @@ export const VoiceList: React.FC<VoiceListProps> = ({
       <div className={styles.searchContainer}>
         <input
           type="text"
-          placeholder="Поиск по имени..."
+          placeholder="Поиск голоса"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className={styles.searchInput}
         />
+        {searchQuery && (
+          <button
+            type="button"
+            className={styles.clearButton}
+            onClick={() => {
+              setSearchQuery('');              
+            }}
+            aria-label="Очистить поиск"
+          >
+            <img src="assets/close_icon.svg" alt="очистить" />
+          </button>
+        )}
+        {!searchQuery && (<img className={styles.searchIcon} src="assets/search_icon.svg" alt="search" />)}        
       </div>
 
       {filteredVoices.length > 0 ? (
@@ -66,7 +79,10 @@ export const VoiceList: React.FC<VoiceListProps> = ({
         ))
       ) : (
         <div className={styles.noResults}>
-          Голоса не найдены
+          <span>
+            Мы не нашли <br />голоса по вашему запросу
+          </span>
+          <div className={styles.noResultsImg}></div>
         </div>
       )}
     </div>
