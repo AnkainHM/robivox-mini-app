@@ -51,32 +51,34 @@ export const VoiceOption: React.FC<VoiceOptionProps> = ({
 
   return (
     <div 
-      className={`${styles.voice} ${isSelected ? styles.selected : ''}`}
+      className={styles.voice}
       onClick={handleVoiceSelect}
     >
-
       <div className={styles.avatar}>
         <img src={voice.gender === 'male' ? 'assets/male_avatar.jpg' : 'assets/female_avatar.jpg'} alt="img" />
       </div>
       <div className={styles.voiceInfo}>
         <h3 className={styles.voiceName}>{voice.translations[0]?.name || voice.id}</h3>
-        <span className={styles.voiceGender}>{voice.gender === 'male' ? 'Мужской' : 'Женский'}</span>
         {/* TODO fix */}
-        { voice.price.id === '835b8f86-1e45-46db-8e93-8ca754012399' && <span className={styles.proBadge}>pro</span> }
-        { voice.price.id === '8054727c-ca87-4e6a-be12-522ecf98c5ab' && <span className={`${styles.proBadge} ${styles.proPlus}`}>pro+</span>}
+        { voice.price.id === '835b8f86-1e45-46db-8e93-8ca754012399' && <div className={styles.proBadge}>pro</div> }
+        { voice.price.id === '8054727c-ca87-4e6a-be12-522ecf98c5ab' && <div className={`${styles.proBadge} ${styles.proPlus}`}>pro+</div>}
       </div>
+
       {voice.audio !== null &&
         <button
-          className={isPlaying ? styles.stopBtn : styles.playBtn}
+          className={styles.playBtn}
           onClick={handlePlayClick}
         >
-          {isPlaying ? (
-            <div className={styles.stopIcon} />
-          ) : (
-            <div className={styles.playIcon} />
-          )}
+          <img 
+            className={`${!isPlaying ? styles.playIcon : ''}`}
+            src={isPlaying ? 'assets/stop_icon.svg' : 'assets/play_icon.svg'} alt="play" />          
         </button>
-      }      
+      }
+
+      <div className={styles.selectBtn}>
+        <img src='assets/select_icon.svg' alt="select" />
+      </div>
+
       
       <div className={styles.playerWrapper}>
         <AudioPlayer

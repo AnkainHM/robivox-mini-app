@@ -23,19 +23,23 @@ export const SpeedSlider: React.FC<SpeedSliderProps> = ({
 
   return (
     <div className={styles.container}>
-      <label className={styles.label}>
-        Скорость: <span className={styles.value}>{value}x</span>
-      </label>
-      <input
-        type="range"
-        min="0"
-        max={steps.length - 1}
-        step="1"
-        value={safeIndex}
-        onChange={handleChange}
-        disabled={disabled}
-        className={styles.slider}
-      />
+      <div className={styles.label}>
+        <div>{ steps[0] }x</div>
+        <div className={styles.speedLabel}>Скорость: { value }x</div>
+        <div>{ steps[steps.length -1 ] }x</div>
+      </div>
+      <div className={styles.sliderWrapper}>
+        <input
+          type="range"
+          min="0"
+          max={steps.length - 1}
+          step="1"
+          value={safeIndex}
+          onChange={handleChange}
+          disabled={disabled}
+          className={styles.slider}
+        />
+      </div>
     </div>
   );
 };

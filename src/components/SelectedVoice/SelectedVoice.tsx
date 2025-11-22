@@ -40,39 +40,34 @@ export const SelectedVoice: React.FC<SelectedVoiceProps> = ({
 
   return (
     <div
-      className={`${styles.container} ${voice.gender === 'male' ? styles.male : styles.female}`}
+      className={styles.container}
     >
-      <div className={styles.top}>
-        <button className={styles.backButton} onClick={handleBack}>
-          {'<'}
-        </button>
+      <button className={styles.backButton} onClick={handleBack}>
+        <img src="assets/back_icon.svg" alt="back" />
+        <span>Назад</span>
+      </button>
+
+      <div className={styles.avatarWrapper}>
         <div className={styles.avatar}>
-          <img src={voice.gender === 'male' ? 'assets/male_avatar.jpg' : 'assets/female_avatar.jpg'} alt="img" />
-        </div>
-        <div className={styles.playBtnWrapper}>
-          {voice.audio !== null && 
+          <img
+            className={styles.avatarImg}
+            src={voice.gender === 'male' ? 'assets/male_avatar.jpg' : 'assets/female_avatar.jpg'} alt="img" />
+          {voice.audio !== null &&
             <button
-              className={`${
-                isPlaying ? styles.stopBtn : styles.playBtn
-              }`}
+              className={styles.playBtn}
               onClick={handlePlayClick}
             >
-              {isPlaying ? (
-                <div className={styles.stopIcon} />
-              ) : (
-                <div className={styles.playIcon} />
-              )}
+              <img 
+                className={`${!isPlaying ? styles.playIcon : ''}`}
+                src={isPlaying ? 'assets/stop_icon.svg' : 'assets/play_icon.svg'} alt="play" />          
             </button>
           }
-        </div> 
-      </div>
-
-      <div className={styles.bottom}>
+        </div>
         <div>{voice.translations[0]?.name || voice.id}</div>
         { voice.price.id === '835b8f86-1e45-46db-8e93-8ca754012399' && <div className={styles.proBadge}>pro</div> }
         { voice.price.id === '8054727c-ca87-4e6a-be12-522ecf98c5ab' && <div className={`${styles.proBadge} ${styles.proPlus}`}>pro+</div>}
       </div>
-      
+ 
       <div className={styles.player}>
         <AudioPlayer
           src={audioUrl}

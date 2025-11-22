@@ -1,44 +1,42 @@
 .container {
   position: relative;
   width: 100%;
-  margin-bottom: 20px;
-  color: var(--tg-theme-text-color);
+  margin-bottom: 12px;
 }
 
 .label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  font-size: 14px;
   font-weight: 500;
-  color: var(--tg-theme-text-color, #000);
-  background: var(--tg-theme-bg-color, #fff);
+  color: #000;
+  background: #fff;
 }
 
 .loading {
-  color: var(--tg-theme-text-color, #000);
+  color: #000;
 }
 
 .error {
-  color: var(--tg-theme-text-color, #000);
+  color: #000;
 }
 
 .dropdownHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
-  background: var(--tg-theme-bg-color, #fff);
-  color: var(--tg-theme-text-color, #000);
-  border: 1px solid var(--tg-theme-hint-color, #ccc);
-  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  height: 46px;
+  padding: 0 16px;
+  border: 1px solid#C4C4C4;
+  border-radius: 16px;
   cursor: pointer;
   transition: border-color 0.2s;
 }
 
-.dropdownHeader:hover {
-  border-color: var(--tg-theme-button-color, #007aff);
-}
-
 .arrow {
+  margin-top: 2px;
   transition: transform 0.2s;
 }
 
@@ -60,29 +58,27 @@
   width: 100%;
   max-width: 500px;
   max-height: 100vh;
-  background: var(--tg-theme-bg-color, #fff);
+  background: #fff;
   border-radius: 0 0 12px 12px;
   overflow: hidden;
   margin: 0;
   animation: slideDown 0.2s ease-out forwards;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .modalHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  background: var(--tg-theme-bg-color, #f5f5f5);
-  border-bottom: 1px solid var(--tg-theme-hint-color, #eee);
+  padding: 24px 15px 40px;
 }
 
-.modalHeader h3 {
+.modalHeader h4 {
   margin: 0;
-  font-size: 18px;
-  color: var(--tg-theme-text-color, #000);
+  font-size: 20px;
+  color: #373737;
+
 }
 
 .closeButton {
@@ -90,7 +86,7 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: var(--tg-theme-text-color, #000);
+  color: #373737;
   padding: 0;
   width: 32px;
   height: 32px;
@@ -100,45 +96,75 @@
   border-radius: 50%;
 }
 
-.closeButton:hover {
-  background: var(--tg-theme-hint-color, #eee);
+.searchContainer {
+  margin: 0 15px;
+  margin-bottom: 12px;
+  position: relative;
 }
 
 .searchInput {
   width: 100%;
-  padding: 14px 16px;
-  border: none;
-  background: var(--tg-theme-bg-color, #f5f5f5);
-  color: var(--tg-theme-text-color, #000);
+  height: 46px;
+  padding: 0 16px;
+  border-radius: 16px;
+  border: 1px solid #C4C4C4;
+  font-size: 14px;
   outline: none;
-  font-size: 16px;
-  border-bottom: 1px solid var(--tg-theme-hint-color, #eee);
+  box-sizing: border-box;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 15px;
+  top: 16px;
+}
+
+.clearButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.clearButton img {
+  width: 20px;
 }
 
 .optionsList {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  padding: 15px;
 }
 
 .option {
   padding: 16px;
-  cursor: pointer;
-  border-bottom: 1px solid var(--tg-theme-hint-color);
+  cursor: pointer;  
   transition: background-color 0.2s;
-  font-size: 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  margin-bottom: 2px;
 }
 
 .option:hover,
 .option.selected {
-  background: var(--tg-theme-button-color, #007aff);
-  color: white;
+  background: #2F6AFF0D;
 }
 
 .noResults {
   padding: 24px;
   text-align: center;
-  color: var(--tg-theme-hint-color, #888);
+  color: #262626;
   font-style: italic;
 }
 
