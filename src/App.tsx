@@ -65,9 +65,6 @@ function App() {
     setIsLoading(false);
   }, []);
 
-  if (isLoading) {
-    return null;
-  }
 
   if (!isInTelegram) {
     return null;
@@ -79,13 +76,11 @@ function App() {
     skip: !selectedLanguage,
   });
 
-
-
   useEffect(() => {
     const webApp = window.Telegram?.WebApp;
     if (webApp && webApp.initDataUnsafe) {      
       webApp.ready();
-
+      setIsInTelegram(true);
       webApp.MainButton.setText('Выбрать голос');
       if (!selectedLanguage || !selectedVoice || !selectedSpeed) {
         webApp.MainButton.hide();
