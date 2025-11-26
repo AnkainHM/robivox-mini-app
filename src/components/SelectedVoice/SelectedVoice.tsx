@@ -15,6 +15,8 @@ export const SelectedVoice: React.FC<SelectedVoiceProps> = ({
   const audioRef = useRef<any>(null);
   const audioUrl = voice.audio && voice.audio?.url
     ? `${import.meta.env.VITE_BACKEND_URL}${encodeURI(voice.audio?.url)}` : '';
+  const pictureUrl = voice.picture && voice.picture?.url
+    ? `${import.meta.env.VITE_BACKEND_URL}${encodeURI(voice.picture?.url)}` : '';
   
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
   
@@ -49,9 +51,11 @@ export const SelectedVoice: React.FC<SelectedVoiceProps> = ({
 
       <div className={styles.avatarWrapper}>
         <div className={styles.avatar}>
-          <img
+          {voice.picture && (<img className={styles.avatarImg} src={pictureUrl} alt="img" />)}
+          {!voice.picture && (<img
             className={styles.avatarImg}
-            src={voice.gender === 'male' ? 'assets/male_avatar.jpg' : 'assets/female_avatar.jpg'} alt="img" />
+            src={voice.gender === 'male' ? 'assets/male_avatar.jpg' : 'assets/female_avatar.jpg'} alt="img" />)}
+                    
           {voice.audio !== null &&
             <button
               className={styles.playBtn}

@@ -51,24 +51,28 @@ const speedSteps = [0.1, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.25, 1.5, 2, 2.5
 const speedStepsElevenlabs = [0.7, 0.8, 0.9, 1, 1.1, 1.2];
 
 function App() {
+  const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
+
+    useEffect(() => {
+      const webApp = window.Telegram?.WebApp;
+      console.log('webApp', webApp)
+    if (!webApp) {
+      setIsAuthorized(false);
+      return;
+    }
+    
+    if (!webApp.initDataUnsafe) {
+      setIsAuthorized(false);
+      return;
+    }
+
+    setIsAuthorized(true);
+  }, []);
+
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
   const [selectedVoice, setSelectedVoice] = useState<Voice | null>(null);
   const [selectedSpeed, setSelectedSpeed] = useState<number>(1);
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
-  const [isInTelegram, setIsInTelegram] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {    
-    if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-      setIsInTelegram(true);
-    }
-    setIsLoading(false);
-  }, []);
-
-
-  if (!isInTelegram) {
-    return null;
-  }
 
   const { data: languagesData, loading: languagesLoading, error: languagesError } = useQuery<GetAllLanguagesResponse>(GETLANGUAGES);
   const { data: voicesData, loading: voicesLoading, error: voicesError } = useQuery<GetVoicesByLanguageResponse>(GETVOICESBYLANGUAGE, {
@@ -79,8 +83,7 @@ function App() {
   useEffect(() => {
     const webApp = window.Telegram?.WebApp;
     if (webApp && webApp.initDataUnsafe) {      
-      webApp.ready();
-      setIsInTelegram(true);
+      webApp.ready();      
       webApp.MainButton.setText('Выбрать голос');
       if (!selectedLanguage || !selectedVoice || !selectedSpeed) {
         webApp.MainButton.hide();
@@ -198,6 +201,28 @@ function App() {
     if (!selectedVoice) return speedSteps;
     return selectedVoice.service.name === 'ElevenLabs' ? speedStepsElevenlabs : speedSteps;
   };
+
+  if (isAuthorized === null) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div>Загрузка...</div>
+      </div>
+    );
+  }
+  
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 text-center">
+        <div className="text-red-500 text-lg font-semibold mb-4">
+          🔒 Доступ запрещён
+        </div>
+        <p className="text-gray-600">
+          Это приложение работает только внутри Telegram.<br />
+          Откройте его через бота или ссылку в Telegram.
+        </p>
+      </div>
+    );
+  }
   
   return (
     <div className="min-h-screen p-4 max-w-md mx-auto">

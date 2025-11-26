@@ -13,7 +13,8 @@ export interface Voice {
   id: string;
   translations: TranslationVoice[];
   service: VoiceService;
-  audio: Audio | null;
+  audio: UploadData | null;
+  picture: UploadData | null;
   gender: string;
   price: Price;
 }
@@ -22,7 +23,7 @@ export interface Price {
   id: string;
 }
 
-export interface Audio {
+export interface UploadData {
   url: string | null;
 }
 

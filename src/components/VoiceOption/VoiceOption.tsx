@@ -23,6 +23,8 @@ export const VoiceOption: React.FC<VoiceOptionProps> = ({
   const audioRef = useRef<any>(null);
   const audioUrl = voice.audio && voice.audio?.url
     ? `${import.meta.env.VITE_BACKEND_URL}${encodeURI(voice.audio?.url)}` : '';
+  const pictureUrl = voice.picture && voice.picture?.url
+    ? `${import.meta.env.VITE_BACKEND_URL}${encodeURI(voice.picture?.url)}` : '';
 
   const handlePlayClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -55,7 +57,8 @@ export const VoiceOption: React.FC<VoiceOptionProps> = ({
       onClick={handleVoiceSelect}
     >
       <div className={styles.avatar}>
-        <img src={voice.gender === 'male' ? 'assets/male_avatar.jpg' : 'assets/female_avatar.jpg'} alt="img" />
+        {voice.picture && (<img src={pictureUrl} alt="img" />)}
+        {!voice.picture && (<img src={voice.gender === 'male' ? 'assets/male_avatar.jpg' : 'assets/female_avatar.jpg'} alt="img" />)}
       </div>
       <div className={styles.voiceInfo}>
         <h3 className={styles.voiceName}>{voice.translations[0]?.name || voice.id}</h3>
