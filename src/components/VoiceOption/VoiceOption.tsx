@@ -61,10 +61,9 @@ export const VoiceOption: React.FC<VoiceOptionProps> = ({
         {!voice.picture && (<img src={voice.gender === 'male' ? 'assets/male_avatar.jpg' : 'assets/female_avatar.jpg'} alt="img" />)}
       </div>
       <div className={styles.voiceInfo}>
-        <h3 className={styles.voiceName}>{voice.translations[0]?.name || voice.id}</h3>
-        {/* TODO fix */}
-        { voice.price.id === '835b8f86-1e45-46db-8e93-8ca754012399' && <div className={styles.proBadge}>pro</div> }
-        { voice.price.id === '8054727c-ca87-4e6a-be12-522ecf98c5ab' && <div className={`${styles.proBadge} ${styles.proPlus}`}>pro+</div>}
+        <h3 className={styles.voiceName}>{voice.translations[0]?.name || voice.id}</h3>        
+        { voice.voiceType?.name === 'pro' && <div className={styles.proBadge}>pro</div> }
+        { voice.voiceType?.name === 'pro+' && <div className={`${styles.proBadge} ${styles.proPlus}`}>pro+</div>}
       </div>
 
       {voice.audio !== null &&

@@ -34,6 +34,9 @@ query GetVoice($languageId: String!) {
       picture {
         url
       }
+      voiceType {
+        name
+      }
     }
   }
 `;

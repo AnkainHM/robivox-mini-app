@@ -17,6 +17,11 @@ export interface Voice {
   picture: UploadData | null;
   gender: string;
   price: Price;
+  voiceType: VoiceType;
+}
+
+export interface VoiceType {
+  name: string;
 }
 
 export interface Price {
