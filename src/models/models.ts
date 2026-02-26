@@ -25,7 +25,7 @@ export interface VoiceType {
 }
 
 export interface Price {
-  id: string;
+  price: number;
 }
 
 export interface UploadData {
@@ -39,6 +39,7 @@ export interface VoiceService {
 export interface TranslationVoice {
   name: string;
   languageCode: string;
+  description: string | null;
 }
 
 export interface GetAllLanguagesResponse {

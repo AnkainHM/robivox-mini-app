@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import DOMPurify from 'dompurify';
 import { Voice } from '../../models/models';
 import styles from './SelectedVoice.module.css';
 import AudioPlayer from 'react-h5-audio-player';
@@ -68,8 +69,21 @@ export const SelectedVoice: React.FC<SelectedVoiceProps> = ({
           }
         </div>
         <div>{voice.translations[0]?.name || voice.id}</div>
-        { voice.price.id === '835b8f86-1e45-46db-8e93-8ca754012399' && <div className={styles.proBadge}>pro</div> }
-        { voice.price.id === '8054727c-ca87-4e6a-be12-522ecf98c5ab' && <div className={`${styles.proBadge} ${styles.proPlus}`}>pro+</div>}
+        { voice.voiceType?.name === 'pro' && <div className={styles.proBadge}>pro</div> }
+        { voice.voiceType?.name === 'pro+' && <div className={`${styles.proBadge} ${styles.proPlus}`}>pro+</div> }
+        
+        <div className={styles.description}>
+          <div className={styles.descriptionPrice}>
+            <div><b>Стоимость:</b></div>
+            <div>1 токен за {1 / voice.price.price} символов</div>
+          </div>
+
+          { voice.translations[0]?.description
+            && <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(voice.translations[0]?.description) }}></div>}
+          
+          { !voice.translations[0]?.description && <div><b>Коммерческие права:</b><br/>Можно использовать в коммерческих целях без доплаты</div>}          
+        </div>
+        
       </div>
  
       <div className={styles.player}>

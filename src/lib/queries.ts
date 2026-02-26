@@ -21,12 +21,13 @@ query GetVoice($languageId: String!) {
         name
       }
       price {
-        id      
+        price
       }
       gender
       translations {
         name
         languageCode
+        description
       }
       audio {
         url

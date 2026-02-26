@@ -25,7 +25,7 @@ export const SpeedSlider: React.FC<SpeedSliderProps> = ({
     <div className={styles.container}>
       <div className={styles.label}>
         <div>{ steps[0] }x</div>
-        <div className={styles.speedLabel}>Скорость: { value }x</div>
+        <div className={styles.speedLabel}>Скорость речи: { value }x</div>
         <div>{ steps[steps.length -1 ] }x</div>
       </div>
       <div className={styles.sliderWrapper}>

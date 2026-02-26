@@ -80,7 +80,6 @@ export const VoiceOption: React.FC<VoiceOptionProps> = ({
       <div className={styles.selectBtn}>
         <img src='assets/select_icon.svg' alt="select" />
       </div>
-
       
       <div className={styles.playerWrapper}>
         <AudioPlayer
